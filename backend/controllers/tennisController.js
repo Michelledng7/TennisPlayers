@@ -3,6 +3,7 @@ const getTennis = (req, res) => {
 };
 
 const createTennis = (req, res) => {
+	console.log(req.body.text);
 	res.status(200).json({ message: 'create!' });
 };
 
