@@ -4,7 +4,7 @@ const matchSchema = new mongoose.Schema(
 	{
 		player: {
 			type: mongoose.Schema.Types.ObjectId,
-			required: [true, 'Please enter your name'],
+			required: [true, 'Please add a player id'],
 			ref: 'Player',
 		},
 		text: {
@@ -15,4 +15,4 @@ const matchSchema = new mongoose.Schema(
 	{ timestamps: true }
 );
 
-module.exports = mongoose.model('Match', matchSchema);
+module.exports = mongoose.model('Matches', matchSchema);

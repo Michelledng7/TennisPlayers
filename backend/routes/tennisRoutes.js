@@ -8,11 +8,13 @@ const {
 	deleteTennis,
 } = require('../controllers/tennisController');
 
-router.route('/').get(getTennis).post(createTennis);
+const { protect } = require('../middleware/authmiddleware');
+
+router.route('/').get(protect, getTennis).post(protect, createTennis);
 //router.get('/', getTennis);
 //router.post('/', createTennis);
 
-router.route('/:id').put(updateTennis).delete(deleteTennis);
+router.route('/:id').put(protect, updateTennis).delete(protect, deleteTennis);
 //router.put('/:id', updateTennis);
 //router.delete('/:id', deleteTennis);
 

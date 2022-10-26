@@ -35,6 +35,7 @@ const registerPlayer = asyncHandler(async (req, res) => {
 			_id: player.id,
 			name: player.name,
 			email: player.email,
+			token: generateToken(player._id),
 		});
 	} else {
 		res.status(400);
@@ -57,6 +58,7 @@ const loginPlayer = asyncHandler(async (req, res) => {
 			_id: player.id,
 			name: player.name,
 			email: player.email,
+			token: generateToken(player._id),
 		});
 	} else {
 		res.status(400);
@@ -66,9 +68,19 @@ const loginPlayer = asyncHandler(async (req, res) => {
 
 // @desc Get player data
 // @route GET /api/players/:id
-// @access Public
+// @access Private
 const getPlayer = asyncHandler(async (req, res) => {
-	res.status(200).json({ message: 'Display Player' });
+	const { _id, name, email } = await Player.findById(req.player.id);
+	res.status(200).json({
+		id: _id,
+		name,
+		email,
+	});
 });
+
+//Generate JWT used by both register and login
+const generateToken = (id) => {
+	return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: '30d' });
+};
 
 module.exports = { registerPlayer, loginPlayer, getPlayer };

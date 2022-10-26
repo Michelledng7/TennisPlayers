@@ -6,8 +6,10 @@ const {
 	getPlayer,
 } = require('../controllers/playerController');
 
+const { protect } = require('../middleware/authMiddleware');
+
 router.post('/', registerPlayer);
 router.post('/login', loginPlayer);
-router.get('/:id', getPlayer);
+router.get('/authorized', protect, getPlayer);
 
 module.exports = router;
