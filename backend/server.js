@@ -1,9 +1,10 @@
 const { urlencoded } = require('body-parser');
 const express = require('express');
 const dotenv = require('dotenv').config();
-//const connectDB = require('./config/db');
+const colors = require('colors');
+const connectDB = require('./config/db');
 const port = process.env.PORT || 8000;
-//connectDB();
+connectDB();
 
 const app = express();
 //use middleware to parse body of request to json

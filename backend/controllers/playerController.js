@@ -46,7 +46,22 @@ const registerPlayer = asyncHandler(async (req, res) => {
 // @route POST /api/players/login
 // @access Public
 const loginPlayer = asyncHandler(async (req, res) => {
-	res.status(200).json({ message: 'Login Player' });
+	const { email, password } = req.body;
+	if (!email || !password) {
+		res.status(400).json({ message: 'Please enter in email and password' });
+	}
+	//check if player exists
+	const player = await Player.findOne({ email });
+	if (player && (await bcrypt.compare(password, player.password))) {
+		res.json({
+			_id: player.id,
+			name: player.name,
+			email: player.email,
+		});
+	} else {
+		res.status(400);
+		throw new Error('Invalid email or password');
+	}
 });
 
 // @desc Get player data
