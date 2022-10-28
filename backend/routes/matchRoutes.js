@@ -2,19 +2,19 @@ const express = require('express');
 
 const router = express.Router();
 const {
-	getTennis,
+	getMatches,
 	createTennis,
-	updateTennis,
-	deleteTennis,
-} = require('../controllers/tennisController');
+	updateMatch,
+	deleteMatch,
+} = require('../controllers/matchController');
 
 const { protect } = require('../middleware/authmiddleware');
 
-router.route('/').get(protect, getTennis).post(protect, createTennis);
+router.route('/').get(protect, getMatches).post(protect, createTennis);
 //router.get('/', getTennis);
 //router.post('/', createTennis);
 
-router.route('/:id').put(protect, updateTennis).delete(protect, deleteTennis);
+router.route('/:id').put(protect, updateMatch).delete(protect, deleteMatch);
 //router.put('/:id', updateTennis);
 //router.delete('/:id', deleteTennis);
 

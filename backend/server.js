@@ -12,7 +12,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 //routes
-app.use('/api/tennis', require('./routes/tennisRoutes'));
+app.use('/api/matches', require('./routes/matchRoutes'));
 app.use('/api/players', require('./routes/playerRoutes'));
 
 app.listen(port, () => console.log(`Server running on port ${port}`));
