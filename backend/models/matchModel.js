@@ -5,7 +5,7 @@ const matchSchema = new mongoose.Schema(
 		player: {
 			type: mongoose.Schema.Types.ObjectId,
 			required: [true, 'Please add a player id'],
-			ref: 'Player',
+			ref: 'Player', //associated with model player
 		},
 		text: {
 			type: String,

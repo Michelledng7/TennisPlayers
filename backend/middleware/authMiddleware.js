@@ -1,3 +1,5 @@
+// Description: this middleware is to check the token and get the player id from the token payload
+
 const jwt = require('jsonwebtoken');
 const player = require('../models/playerModel');
 const asyncHandler = require('express-async-handler');
@@ -15,8 +17,8 @@ const protect = asyncHandler(async (req, res, next) => {
 			const decoded = jwt.verify(token, process.env.JWT_SECRET);
 			console.log(decoded);
 
-			// get player from token, assign the player id to the request player
-			req.player = await player.findById(decoded.id).select('-password');
+			// get player from token
+			req.player = await player.findById(decoded.id).select('-password'); //exclude password
 			console.log(req.player);
 			next();
 		} catch (error) {

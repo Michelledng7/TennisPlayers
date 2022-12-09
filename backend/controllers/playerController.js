@@ -31,8 +31,9 @@ const registerPlayer = asyncHandler(async (req, res) => {
 		password: hashedPassword,
 	});
 	if (player) {
+		//if player is created
 		res.status(201).json({
-			_id: player.id,
+			_id: player.id, //_id is the default id for mongoDB
 			name: player.name,
 			email: player.email,
 			token: generateToken(player._id),
@@ -52,7 +53,8 @@ const loginPlayer = asyncHandler(async (req, res) => {
 		res.status(400).json({ message: 'Please enter in email and password' });
 	}
 	//check if player exists
-	const player = await Player.findOne({ email });
+	const player = await Player.findOne({ email }); //if player in database
+	console.log(player);
 	if (player && (await bcrypt.compare(password, player.password))) {
 		res.json({
 			_id: player.id,
@@ -66,7 +68,7 @@ const loginPlayer = asyncHandler(async (req, res) => {
 	}
 });
 
-// @desc Get player data
+// @desc Get currently logged in player
 // @route GET /api/players/:id
 // @access Private
 const getPlayer = asyncHandler(async (req, res) => {

@@ -15,7 +15,7 @@ const getMatches = asyncHandler(async (req, res) => {
 // @desc    Create a match
 // @route   POST /api/tennis
 // @access  Private
-const createTennis = asyncHandler(async (req, res) => {
+const createMatches = asyncHandler(async (req, res) => {
 	console.log('createMatches');
 	console.log(req.player.id);
 	if (!req.body.text) {
@@ -47,6 +47,7 @@ const updateMatch = asyncHandler(async (req, res) => {
 		throw new Error('Player not found');
 	}
 
+	//pls check here
 	//check if the logged user matches the goal user
 	if (match.player.toString() !== req.player.id) {
 		res.status(401);
@@ -86,4 +87,4 @@ const deleteMatch = asyncHandler(async (req, res) => {
 	res.status(200).json({ message: `Match removed ${req.params.id}` });
 });
 
-module.exports = { getMatches, createTennis, updateMatch, deleteMatch };
+module.exports = { getMatches, createMatches, updateMatch, deleteMatch };
