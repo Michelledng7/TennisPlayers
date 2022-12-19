@@ -84,7 +84,7 @@ const deleteMatch = asyncHandler(async (req, res) => {
 		throw new Error('Not authorized to delete the match');
 	}
 	await Matches.deleteOne(match);
-	res.status(200).json({ message: `Match removed ${req.params.id}` });
+	res.status(200).json(match);
 });
 
 module.exports = { getMatches, createMatches, updateMatch, deleteMatch };

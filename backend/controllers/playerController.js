@@ -72,12 +72,7 @@ const loginPlayer = asyncHandler(async (req, res) => {
 // @route GET /api/players/:id
 // @access Private
 const getPlayer = asyncHandler(async (req, res) => {
-	const { _id, name, email } = await Player.findById(req.player.id);
-	res.status(200).json({
-		id: _id,
-		name,
-		email,
-	});
+	req.status(200).json(req.player);
 });
 
 //Generate JWT used by both register and login
